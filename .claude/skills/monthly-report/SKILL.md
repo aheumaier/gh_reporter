@@ -74,10 +74,13 @@ overwrite each other. Last month's report of the group is `reports/<previous mon
    them. Every claim still links its PR, or its commit when it was pushed without one. A headline never claims
    more than its text: "Shorter CI queues", not "Faster builds"; "Dev now, production next". Use one name for each
    thing, explain it where it first appears, and keep to it (not "feature environments" in one place and "review
-   environments" in another).
+   environments" in another). Write an action as a plain instruction that names the place: "open your PRs for Sdui
+   Meet in the monorepo", not "send changes to Sdui Meet to the monorepo" (the user found that hard to parse,
+   2026-11-27). *In 30 seconds* comes before any explanation, so it uses only words the reader already knows.
 5. **Check.** Every claim matches a fact or verify file. Every link opens a PR (or commit) in the right repo. Then
    start a sub-agent with no context that reads only the report as a developer from another team and lists every
-   question mark, what each item changes for it, what is missing and what is too detailed. Fix what it finds,
+   question mark, every sentence it had to read twice, what each item changes for it, what is missing and what is
+   too detailed. Fix what it finds,
    verifying first.
 6. **Improve.** Ask the user what to change. Write lasting lessons back into this skill,
    `.claude/agents/repo-reporter.md`, `scripts/collect.sh` or CLAUDE.md, so the next month starts better. Keep
