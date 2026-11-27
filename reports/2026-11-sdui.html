@@ -1,0 +1,472 @@
+<title>Sdui app news, November 2026</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<!-- Newsletter page. scripts/newsletter-html.sh copies this file to reports/YYYY-MM-GROUP.html and puts the
+     newsletter's markdown into the script block at the end; the page renders it in the browser. Edit the design
+     here, never in a generated page. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400&family=DM+Mono:wght@400;500&display=swap">
+<style>
+  /* Seven Education brand (https://brand.7education.com/seven-education/guidelines, read 2026-11-27): Organic White
+     and Courageous Black carry the page, Empowering Magenta leads, the secondary colours mark status only. The brand
+     face is PP Mori, a licensed font a page can't load; it is used where installed, else Plus Jakarta Sans, the
+     fallback the brand site itself loads. Brand "Contrast" shades are used for text so it stays readable. */
+  :root {
+    --paper: #fffaf6;            /* Organic White */
+    --card: #ffffff;
+    --ink: #1c1c1c;              /* Courageous Black */
+    --muted: #1c1c1cb8;
+    --rule: #1c1c1c1f;
+    --magenta: #f43175;          /* Empowering Magenta */
+    --accent: #a41037;           /* Magenta contrast: links and headings in colour */
+    --act: #a41037;
+    --act-bg: #fde6f0;           /* Magenta light */
+    --coming: #072ac8;           /* Effective Blue */
+    --coming-bg: #e3efff;
+    --win: #0b5a3e;              /* Growing Green contrast */
+    --win-bg: #cff8eb;           /* Growing Green light */
+    --wait: #6b5200;
+    --wait-bg: #fffbc2;          /* Supporting Yellow light */
+    --wait-line: #f6be00;        /* Supporting Yellow contrast */
+    --tint: #1c1c1c0a;
+    --font: "PP Mori", "Plus Jakarta Sans", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    --mono: "DM Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1c1c1c; --card: #262626; --ink: #fffaf6; --muted: #fffaf6b3; --rule: #fffaf61f;
+      --accent: #fda4c7; --act: #fda4c7; --act-bg: #f431752e; --coming: #b3d8ff; --coming-bg: #3168ff2e;
+      --win: #66e2c3; --win-bg: #21c2a229; --wait: #fff487; --wait-bg: #fedd001f; --wait-line: #f6be00;
+      --tint: #fffaf60d; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1c1c1c; --card: #262626; --ink: #fffaf6; --muted: #fffaf6b3; --rule: #fffaf61f;
+    --accent: #fda4c7; --act: #fda4c7; --act-bg: #f431752e; --coming: #b3d8ff; --coming-bg: #3168ff2e;
+    --win: #66e2c3; --win-bg: #21c2a229; --wait: #fff487; --wait-bg: #fedd001f; --wait-line: #f6be00;
+    --tint: #fffaf60d; color-scheme: dark;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font: 400 1.0625rem/1.65 var(--font);
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 2.5rem 4rem;
+  }
+  .page { max-width: 46rem; margin: 0 auto; display: grid; gap: 3rem; }
+  .page > * { min-width: 0; }
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+  a:hover { text-decoration-thickness: 2px; }
+  a:focus-visible { outline: 2px solid var(--magenta); outline-offset: 2px; border-radius: 3px; }
+  code {
+    font: 500 0.82em/1.4 var(--mono);
+    background: var(--tint);
+    padding: 0.1em 0.35em;
+    border-radius: 6px;
+    overflow-wrap: anywhere;
+  }
+  a.ref { font: 500 0.8em/1 var(--mono); white-space: nowrap; }
+  p, ul { margin: 0; }
+  strong { font-weight: 700; }
+
+  /* Masthead */
+  .masthead { display: grid; gap: 1.1rem; }
+  .brand {
+    display: flex; align-items: center; gap: 0.6rem;
+    font: 700 1rem/1 var(--font);
+  }
+  .brand::before { content: ""; width: 0.85rem; height: 0.85rem; border-radius: 50%; background: var(--magenta); }
+  .eyebrow {
+    font: 700 0.78rem/1.2 var(--font);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 3px solid var(--magenta);
+  }
+  .eyebrow span:last-child { color: var(--muted); letter-spacing: 0.02em; text-transform: none; font-weight: 500; }
+  h1 {
+    margin: 0;
+    font: 800 clamp(2rem, 5.2vw, 3.1rem)/1.08 var(--font);
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  /* In 30 seconds */
+  .glance { display: grid; gap: 0.9rem; }
+  .label {
+    font: 700 0.78rem/1.2 var(--font);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .glance-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 0.9rem; }
+  .glance-card {
+    border-radius: 24px;
+    padding: 1.1rem 1.2rem 1.25rem;
+    display: grid; gap: 0.45rem; align-content: start;
+    font-size: 0.97rem; line-height: 1.55;
+    min-width: 0;
+  }
+  .glance-card .kind { font: 800 1rem/1 var(--font); }
+  .glance-card.act { background: var(--act-bg); }
+  .glance-card.coming { background: var(--coming-bg); }
+  .glance-card.win { background: var(--win-bg); }
+  .kind.act { color: var(--act); }
+  .kind.coming { color: var(--coming); }
+  .kind.win { color: var(--win); }
+  .glance-card .text::first-letter { text-transform: uppercase; }
+  .intro { color: var(--muted); font-style: italic; }
+
+  /* Sections */
+  section { display: grid; gap: 1.1rem; }
+  section > * { min-width: 0; }
+  h2 {
+    margin: 0;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--rule);
+    font: 800 1.6rem/1.2 var(--font);
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+  section > ul { padding-left: 1.2rem; display: grid; gap: 0.75rem; }
+  section > ul > li::marker { color: var(--magenta); }
+
+  /* Actions */
+  .action {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--magenta);
+    border-radius: 24px;
+    padding: 1.25rem 1.3rem;
+    display: grid; gap: 0.8rem;
+  }
+  .action h3 { margin: 0; font: 700 1.2rem/1.25 var(--font); color: var(--act); text-wrap: balance; }
+  .action ul { list-style: none; padding: 0; display: grid; gap: 0.7rem; }
+  .action li.row { display: grid; grid-template-columns: 3.5rem minmax(0, 1fr); gap: 0.75rem; }
+  .action li.row > .k { font: 700 0.75rem/2.1 var(--font); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .action li.row ul { list-style: disc; padding-left: 1.1rem; margin-top: 0.6rem; }
+  .action li.row ul > li::marker { color: var(--magenta); }
+  .done { font-weight: 700; color: var(--win); display: flex; gap: 0.5rem; align-items: baseline; }
+  .done::before { content: "✓"; }
+
+  /* Coming up */
+  .items { display: grid; gap: 0.8rem; }
+  .item {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 24px;
+    padding: 1.05rem 1.25rem 1.15rem;
+    display: grid; gap: 0.55rem;
+  }
+  .item .what { font: 700 1.05rem/1.35 var(--font); }
+  .item .status { font-size: 0.9rem; color: var(--muted); display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.6rem; }
+  .pill {
+    font: 700 0.72rem/1 var(--font);
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 0.4em 0.75em; border-radius: 90px;
+    background: var(--tint);
+    color: var(--ink);
+  }
+  .pill.preparing { background: var(--wait-bg); color: var(--wait); box-shadow: inset 0 0 0 1px var(--wait-line); }
+  .pill.in-review { background: var(--coming-bg); color: var(--coming); }
+  .pill.ready-to-start, .pill.live { background: var(--win-bg); color: var(--win); }
+  .item .for { font-size: 0.97rem; }
+  .item .for::before { content: "For you: "; font-weight: 700; }
+  .table-wrap { overflow-x: auto; }
+  .table-wrap table { border-collapse: collapse; font-size: 0.95rem; }
+  .table-wrap th, .table-wrap td { border-bottom: 1px solid var(--rule); padding: 0.5rem; text-align: left; vertical-align: top; }
+
+  /* Progress line */
+  .progress {
+    background: var(--act-bg);
+    border-radius: 24px;
+    padding: 1.05rem 1.25rem;
+  }
+
+  /* Footer */
+  footer {
+    border-top: 3px solid var(--magenta);
+    padding-top: 1.2rem;
+    display: grid; gap: 0.8rem;
+    font-size: 0.93rem; color: var(--muted);
+  }
+  footer strong { color: var(--ink); }
+  footer em { font-style: normal; }
+  .fallback { white-space: pre-wrap; font: 0.9rem/1.5 var(--mono); }
+
+  @media (max-width: 30rem) {
+    body { padding-block: 1.5rem 3rem; font-size: 1rem; }
+    .page { gap: 2.4rem; }
+    .action li.row { grid-template-columns: 1fr; gap: 0.15rem; }
+    .action li.row > .k { line-height: 1.4; }
+  }
+</style>
+
+<main class="page" id="page"></main>
+
+<script type="text/markdown" id="newsletter">
+# Sdui Meet moved into the monorepo, and the extra login check now asks once a day instead of every six hours
+
+*Sdui app news for November 2026 (2026-11-01 to 2026-11-27).*
+
+**In 30 seconds**
+- **Act:** the code of Sdui Meet (video calls) and vault-proxy (part of 2FA) now lives in the monorepo. Open your PRs
+  for them there, not in the old repos. If your app calls the Sdui API, check the three changes below.
+- **Coming:** a portal for school operators, the extra login check at schools without the authenticator app, and the
+  Untis timetable connection moving into the monorepo.
+- **Win:** encrypted push notifications work on iOS, the Android keyboard no longer covers the chat input, unread counts
+  load faster, and chat translation can now run on the user's device.
+
+The *monorepo* is [sdui-monorepo](https://github.com/7education/sdui-monorepo), the one GitHub repo where all Sdui code is being collected: the app (iOS, Android,
+web), *Core* (the backend behind the `/v1` API) and the timetable.
+
+## What you need to do
+
+**Open PRs for Sdui Meet and vault-proxy in the monorepo**
+- *Who:* anyone who changes or builds Sdui Meet (Sdui's video calls, built on the open-source Jitsi Meet) or vault-proxy
+  (the service in front of the secret store used for two-factor login, 2FA).
+- *What:* vault-proxy moved from `sdui-hq/sduiapp-vault-proxy` to the folder `apps/vault-proxy` on 2026-11-02, and
+  production has run the monorepo build since 2026-11-03 ([#1653](https://github.com/7education/sdui-monorepo/pull/1653)). Sdui Meet moved to `apps/sduiapp-meet` on
+  2026-11-20; its old repo `sdui-hq/sduiapp-meet` is now read-only ([#1785](https://github.com/7education/sdui-monorepo/pull/1785)). (`sdui-hq` is Sdui's GitHub organisation
+  from before 7education.) One new rule: when a PR brings in a new Jitsi version, merge it with a merge commit, not
+  squash or rebase. That keeps the Jitsi history, so the next Jitsi update can be merged in cleanly.
+- *Help:* the Teams channel "sdui".
+
+**Check your calls to the Sdui API**
+- *Who:* teams whose own apps or services call Core's `/v1` API.
+- *What:* three changes, each live since the day it was merged:
+  - *Step-up* is the extra login check: before sensitive pages such as the digital classbook and sick notes, users enter
+    their second factor again. It is on at schools that use the authenticator app. Since 2026-11-06 users there are
+    asked about once a day instead of every 6 hours, and enter only the second factor instead of logging in again. It
+    used to apply only to users with 2FA by e-mail; now it applies to every user at those schools, so your requests for
+    any of them can get `401 step_up_required` (the response asks for the second factor, `acr_values: '2'`). Calls with
+    a service token (machine to machine, not a user login) are not affected. In the app, opening sick notes now asks for
+    step-up and the exports page no longer does ([#1688](https://github.com/7education/sdui-monorepo/pull/1688)).
+  - Chat translation (`GET /v1/channels/chats/{chat}/messages/{message}/translate`) returns `422` at schools that turn
+    on translation on the device. It means "this school translates in the app, not on the server": treat it as "not
+    available here", not as a failure. No school has it on yet ([#1790](https://github.com/7education/sdui-monorepo/pull/1790), 2026-11-26).
+  - `GET /v1/find-schools`, the school search before login, no longer lists school operators (*holders*, see Coming up),
+    which Core stores like schools. No action unless you need them ([#1747](https://github.com/7education/sdui-monorepo/pull/1747), 2026-11-12).
+- *Help:* the Teams channel "sdui", or mention `@7education/sdui` on a PR.
+
+**If you read data from the Classes & Groups service**
+- *Who:* teams that use the platform's Classes & Groups service, which gets school years, classes, courses and
+  enrollments from Core.
+- *What:* since 2026-11-11 Core no longer sends it school years that started before 2025-01-01 (so 2024/25 and older),
+  or their classes, courses and enrollments ([#1684](https://github.com/7education/sdui-monorepo/pull/1684), [#1685](https://github.com/7education/sdui-monorepo/pull/1685)). The PRs don't say whether old years that were already
+  sent get deleted: ask in the Teams channel "sdui" before you rely on them.
+
+Nothing else needs action from you.
+
+## Coming up
+
+| What | Status | What it means for you |
+|---|---|---|
+| Portal for school operators (*holders*: a city or non-profit that runs several schools) | Preparing: test version only; a page with news from all of a holder's schools is in review ([#1806](https://github.com/7education/sdui-monorepo/pull/1806)) | Holder admins will see all their schools in one place. Since 2026-11-12 Core tells holders apart from schools; users see no link to the portal until it is set up ([#1747](https://github.com/7education/sdui-monorepo/pull/1747)) |
+| Step-up no longer tied to the school's 2FA setting | In review ([#1862](https://github.com/7education/sdui-monorepo/pull/1862)) | Today step-up is only switched on at schools that use the authenticator app. After this, other schools can switch it on too; the PR doesn't say yet which second factor their users enter. Support teams: expect questions about the classbook and sick notes |
+| The Untis connection (`sduiapp-timetable-untis-remote-api`, the link to the Untis timetable software) moves into the monorepo | Planned, blocked by an open review question ([#1130](https://github.com/7education/sdui-monorepo/pull/1130)) | You'll open PRs for it in the monorepo |
+
+None of these has a date yet. The next issue will report what changed.
+
+## Where this is going
+
+**Progress:** 2 repos moved into the monorepo this month (vault-proxy, Sdui Meet); 1 is waiting (Untis). The goal is all
+code from the old `sdui-hq` repos in one repo: one place to search, one way to review PRs, one set of CI checks.
+
+**AI in the app.** Chat translation can now run on the user's device with open models instead of DeepL or Microsoft: the
+text stays on the device and costs nothing per message. Schools turn it on one by one ([#1790](https://github.com/7education/sdui-monorepo/pull/1790)). The Seven Assistant,
+the AI helper in the app, can now also search the user's own chats, at schools that turn this on ([#1418](https://github.com/7education/sdui-monorepo/pull/1418), [#1801](https://github.com/7education/sdui-monorepo/pull/1801)).
+
+## Good to know
+
+- **Merged usually means live the same day.** The team deploys `main` by hand almost every workday, and each deploy
+  ships everything merged since the last one. This month's main changes went live within an hour of their merge.
+- **The `pipeline / …` checks on your PR are a test run** of the shared delivery pipeline from the platform team
+  (`@7education/platform`), on the company's own build servers since 2026-11-18. They deploy nothing and don't block
+  your merge. If their Core integration checks fail, that is a known pipeline problem, not your code ([#1773](https://github.com/7education/sdui-monorepo/pull/1773), [#1788](https://github.com/7education/sdui-monorepo/pull/1788)).
+- **Sdui production is now watched by alerts in Coralogix**, the monitoring tool. Since 2026-11-16, 84 alerts on errors,
+  response times, queues, encryption and the servers post to the Slack channel `#coralogix-notifications`. The *Sdui*
+  dashboard folder in Coralogix has a dashboard for production health and logins ([change](https://github.com/7education/Infrastructure/commit/6389568), [Infrastructure#84](https://github.com/7education/Infrastructure/pull/84)).
+- **App fixes:** encrypted push notifications now work on iOS ([#1661](https://github.com/7education/sdui-monorepo/pull/1661)); on Android the keyboard no longer covers the
+  chat input ([#1739](https://github.com/7education/sdui-monorepo/pull/1739), [#1782](https://github.com/7education/sdui-monorepo/pull/1782)); unread counts load faster ([#1791](https://github.com/7education/sdui-monorepo/pull/1791), [#1802](https://github.com/7education/sdui-monorepo/pull/1802)).
+
+## Thanks
+
+Eduard Mayer (moving Sdui Meet into the monorepo, faster unread counts), Nick Struckmeyer (the portal for school
+operators), Amir Reza Javaher Dashti (translation on the device), Mikołaj Gruszecki (the Seven Assistant), Ihor Solopii
+(browser tests for chat and push), Vladyslav Koherhin (step-up once a day) and Suraj Mookola (moving vault-proxy into
+the monorepo).
+
+**When something breaks or you have a question:** the Microsoft Teams channel "sdui", or mention the GitHub team
+`@7education/sdui` on a PR. Deploys: the Deployment Guide in Confluence (space SCTS) and the repo's [deploy guide](https://github.com/7education/sdui-monorepo/blob/main/docs/sdui-platform/guides/production-deployments.md).
+Accountable for the monorepo, per its GitHub description: Amir D.
+
+*Source: pull requests in `7education/sdui-monorepo` and Sdui's Coralogix setup in `7education/Infrastructure`.*
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script>
+(function () {
+  const page = document.getElementById('page');
+  const src = document.getElementById('newsletter').textContent.trim();
+  const el = (tag, cls, html) => {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (html != null) e.innerHTML = html;
+    return e;
+  };
+  const slug = s => s.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+  if (!window.marked) {
+    page.appendChild(el('pre', 'fallback')).textContent = src;
+    return;
+  }
+  const doc = el('div', null, marked.parse(src));
+
+  // PR, issue and commit links ("#1653", "Infrastructure#84", "change") are set in the mono font.
+  doc.querySelectorAll('a').forEach(a => {
+    if (/^([\w.-]+)?#\d+$|^change$/.test(a.textContent.trim())) a.classList.add('ref');
+  });
+
+  try {
+    // Masthead: the h1 headline and the "*<Group> news for <Month> (<range>).*" line.
+    const head = el('header', 'masthead');
+    head.appendChild(el('div', 'brand', 'Seven Education'));
+    const h1 = doc.querySelector('h1');
+    const dateline = h1 && h1.nextElementSibling;
+    if (dateline && dateline.matches('p') && dateline.firstElementChild && dateline.firstElementChild.matches('em')) {
+      const m = dateline.textContent.trim().match(/^(.*?) for (.*?)\s*\((.*)\)\.?$/);
+      head.appendChild(el('div', 'eyebrow', m
+        ? `<span>${m[1]} · ${m[2]}</span><span>Covers ${m[3]}</span>`
+        : `<span>${dateline.innerHTML}</span>`));
+      dateline.remove();
+    }
+    if (h1) head.appendChild(h1);
+    page.appendChild(head);
+
+    // In 30 seconds: "**In 30 seconds**" and its list of **Act:** / **Coming:** / **Win:** items.
+    const glanceLabel = [...doc.querySelectorAll('p')].find(p => /^In 30 seconds$/i.test(p.textContent.trim()));
+    if (glanceLabel && glanceLabel.nextElementSibling && glanceLabel.nextElementSibling.matches('ul')) {
+      const list = glanceLabel.nextElementSibling;
+      const box = el('div', 'glance');
+      box.appendChild(el('div', 'label', 'In 30 seconds'));
+      const cards = el('div', 'glance-cards');
+      list.querySelectorAll(':scope > li').forEach(li => {
+        const lead = li.querySelector('strong');
+        const kind = lead ? lead.textContent.replace(/:\s*$/, '').trim() : '';
+        if (lead) lead.remove();
+        const card = el('div', 'glance-card ' + slug(kind));
+        card.appendChild(el('div', 'kind ' + slug(kind), kind));
+        card.appendChild(el('div', 'text', li.innerHTML.trim().replace(/^:\s*/, '')));
+        cards.appendChild(card);
+      });
+      box.appendChild(cards);
+      page.appendChild(box);
+      list.remove();
+      glanceLabel.remove();
+    }
+
+    // Anything before the first h2 (such as a term explained up front) is an intro note.
+    while (doc.firstElementChild && !doc.firstElementChild.matches('h2')) {
+      const n = doc.firstElementChild;
+      n.classList.add('intro');
+      page.appendChild(n);
+    }
+
+    // One <section> per h2.
+    let section = null;
+    [...doc.children].forEach(n => {
+      if (n.matches('h2')) {
+        section = el('section');
+        section.id = slug(n.textContent);
+        page.appendChild(section);
+      }
+      if (section) section.appendChild(n);
+    });
+
+    page.querySelectorAll('section').forEach(sec => {
+      const name = sec.id;
+
+      // What you need to do: "**Title**" + list of *Who:* / *What:* / *Help:* rows.
+      if (name.startsWith('what-you-need-to-do')) {
+        [...sec.children].forEach(n => {
+          const strong = n.matches('p') && n.children.length === 1 && n.firstElementChild.matches('strong')
+            && n.textContent.trim() === n.firstElementChild.textContent.trim();
+          if (strong && n.nextElementSibling && n.nextElementSibling.matches('ul')) {
+            const card = el('article', 'action');
+            const list = n.nextElementSibling;
+            card.appendChild(el('h3', null, n.firstElementChild.innerHTML));
+            list.querySelectorAll(':scope > li').forEach(li => {
+              const first = li.firstElementChild;
+              if (first && first.matches('em') && li.innerHTML.trim().startsWith('<em>')) {
+                const k = first.textContent.replace(/:\s*$/, '');
+                first.remove();
+                const body = li.innerHTML.trim().replace(/^:\s*/, '');
+                li.className = 'row';
+                li.innerHTML = '';
+                li.appendChild(el('span', 'k', k));
+                li.appendChild(el('div', null, body));
+              }
+            });
+            card.appendChild(list);
+            n.replaceWith(card);
+          } else if (n.matches('p') && /^Nothing else/.test(n.textContent.trim())) {
+            n.classList.add('done');
+          }
+        });
+      }
+
+      // Coming up: the What / Status / What it means table becomes a list of cards.
+      sec.querySelectorAll('table').forEach(table => {
+        const heads = [...table.querySelectorAll('thead th')].map(th => th.textContent.trim().toLowerCase());
+        if (heads.length === 3 && heads[0] === 'what' && heads[1] === 'status') {
+          const items = el('div', 'items');
+          table.querySelectorAll('tbody tr').forEach(tr => {
+            const [what, status, means] = tr.querySelectorAll('td');
+            const item = el('article', 'item');
+            item.appendChild(el('div', 'what', what.innerHTML));
+            const st = el('div', 'status');
+            const m = status.innerHTML.match(/^(Planned|Preparing|In review|Ready to start|Live)\b[:,]?\s*(.*)$/s);
+            if (m) {
+              st.appendChild(el('span', 'pill ' + slug(m[1]), m[1]));
+              if (m[2]) st.appendChild(el('span', null, m[2]));
+            } else {
+              st.innerHTML = status.innerHTML;
+            }
+            item.appendChild(st);
+            item.appendChild(el('div', 'for', means.innerHTML));
+            items.appendChild(item);
+          });
+          table.replaceWith(items);
+        } else {
+          const wrap = el('div', 'table-wrap');
+          table.replaceWith(wrap);
+          wrap.appendChild(table);
+        }
+      });
+
+      sec.querySelectorAll(':scope > p').forEach(p => {
+        if (/^Progress:/.test(p.textContent.trim())) p.classList.add('progress');
+      });
+
+      // Thanks: the first paragraph thanks people; what follows (help, source line) is the footer.
+      if (name === 'thanks') {
+        const rest = [...sec.children].slice(2);
+        if (rest.length) {
+          const footer = el('footer');
+          rest.forEach(n => { if (n.matches('hr')) n.remove(); else footer.appendChild(n); });
+          page.appendChild(footer);
+        }
+      }
+    });
+  } catch (err) {
+    console.error('newsletter layout', err);
+    page.innerHTML = '';
+    page.appendChild(el('div', null, marked.parse(src)));
+  }
+})();
+</script>

@@ -7,8 +7,8 @@ description: Write the monthly GitHub news report for one group of repos (one li
 
 Arguments: the month as `YYYY-MM` and the group: `repos/<group>.txt` lists its repos. If one is missing, ask; a
 month that has not ended gives partial numbers, so say so in the report. Data, fact and verify files of a run live in
-`reports/YYYY-MM/<group>/`, below called the group folder; the report is `reports/YYYY-MM-<group>.md`. So groups never
-overwrite each other. Last month's report of the group is `reports/<previous month>-<group>.md`.
+`reports/YYYY-MM/<group>/`, below called the group folder; the report is `reports/YYYY-MM-<group>.md` and its page
+`reports/YYYY-MM-<group>.html`. So groups never overwrite each other. Last month's report of the group is `reports/<previous month>-<group>.md`.
 
 ## Groups
 
@@ -80,8 +80,13 @@ overwrite each other. Last month's report of the group is `reports/<previous mon
 5. **Check.** Every claim matches a fact or verify file. Every link opens a PR (or commit) in the right repo. Then
    start a sub-agent with no context that reads only the report as a developer from another team and lists every
    question mark, every sentence it had to read twice, what each item changes for it, what is missing and what is
-   too detailed. Fix what it finds,
-   verifying first.
-6. **Improve.** Ask the user what to change. Write lasting lessons back into this skill,
+   too detailed. Fix what it finds, verifying first.
+6. **Publish.** Run `scripts/newsletter-html.sh YYYY-MM <group>` and publish the page with the Artifact tool
+   (icon `news`, one sentence as description). Look at it at phone width and in dark mode first: every link of the
+   markdown is on the page, and the *In 30 seconds* cards, action cards and *Coming up* cards are there. They
+   appear only when the markdown keeps the format of step 4 (`**In 30 seconds**`, `*Who:*`, the table columns What,
+   Status, What it means). On a rerun, publish the same file again so the link stays. Give the user the link: the
+   page is private until they share it.
+7. **Improve.** Ask the user what to change. Write lasting lessons back into this skill,
    `.claude/agents/repo-reporter.md`, `scripts/collect.sh` or CLAUDE.md, so the next month starts better. Keep
    one-off corrections in the report only.

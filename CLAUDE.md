@@ -10,7 +10,8 @@ them want to read it: what shipped, what changed, who did notable work, and what
 too, so explain things in plain words.
 
 There is no application code. The tools are the GitHub CLI (`gh`, already logged in with access to the private
-org repos) and Claude Code sub-agents running in parallel. Each run writes one markdown file for one group.
+org repos) and Claude Code sub-agents running in parallel. Each run writes one newsletter for one group: a markdown file and an
+HTML page made from it, published as a private Artifact.
 
 ## Layout
 
@@ -25,8 +26,13 @@ org repos) and Claude Code sub-agents running in parallel. Each run writes one m
   `reports/YYYY-MM/<group>/<repo>.md`, a fact file with numbers, highlights, themes, people, in-flight work and open
   questions. The main session writes the report from these files and does not re-read raw `gh` output.
 - `.claude/skills/monthly-report/SKILL.md`: the end-to-end workflow (`/monthly-report YYYY-MM GROUP`): collect,
-  fan out, ask the user the open questions, write `reports/YYYY-MM-GROUP.md`, check, then feed lessons back into
-  the tool.
+  fan out, ask the user the open questions, write `reports/YYYY-MM-GROUP.md`, check, publish the page, then feed
+  lessons back into the tool.
+- `scripts/newsletter-html.sh YYYY-MM GROUP`: builds `reports/YYYY-MM-GROUP.html` from the markdown report and
+  `templates/newsletter.html`, the one design for every newsletter, in the Seven Education brand
+  ([guidelines](https://brand.7education.com/seven-education/guidelines); the template names the colours it uses).
+  The page lays the markdown out in the browser, so the markdown keeps the fixed parts of the skill's step 4. Change
+  the design in the template, never in a page.
 
 The month window is the UTC calendar month. When the tool gets something wrong, fix the script, agent brief or
 skill rather than patching one report by hand, so the next month benefits.
@@ -80,5 +86,5 @@ Org-wide `gh search prs --owner 7education ...` covers every org repo, not only 
   whether they must act. Explain repo names and internal terms the first time they appear. A reviewer with no
   context, reading as a developer from another team, found that explaining how a change works is not enough
   (2026-11-27).
-- The repos are private. The report stays a local markdown file. Do not publish it as an Artifact, post it or
-  send it anywhere unless the user asks.
+- The repos are private. The newsletter is published only as a private Artifact (the user asked for this on
+  2026-11-27); the user shares it from the page. Do not post it or send it anywhere else unless the user asks.

@@ -1,0 +1,471 @@
+<title>Infrastructure news, November 2026</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<!-- Newsletter page. scripts/newsletter-html.sh copies this file to reports/YYYY-MM-GROUP.html and puts the
+     newsletter's markdown into the script block at the end; the page renders it in the browser. Edit the design
+     here, never in a generated page. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400&family=DM+Mono:wght@400;500&display=swap">
+<style>
+  /* Seven Education brand (https://brand.7education.com/seven-education/guidelines, read 2026-11-27): Organic White
+     and Courageous Black carry the page, Empowering Magenta leads, the secondary colours mark status only. The brand
+     face is PP Mori, a licensed font a page can't load; it is used where installed, else Plus Jakarta Sans, the
+     fallback the brand site itself loads. Brand "Contrast" shades are used for text so it stays readable. */
+  :root {
+    --paper: #fffaf6;            /* Organic White */
+    --card: #ffffff;
+    --ink: #1c1c1c;              /* Courageous Black */
+    --muted: #1c1c1cb8;
+    --rule: #1c1c1c1f;
+    --magenta: #f43175;          /* Empowering Magenta */
+    --accent: #a41037;           /* Magenta contrast: links and headings in colour */
+    --act: #a41037;
+    --act-bg: #fde6f0;           /* Magenta light */
+    --coming: #072ac8;           /* Effective Blue */
+    --coming-bg: #e3efff;
+    --win: #0b5a3e;              /* Growing Green contrast */
+    --win-bg: #cff8eb;           /* Growing Green light */
+    --wait: #6b5200;
+    --wait-bg: #fffbc2;          /* Supporting Yellow light */
+    --wait-line: #f6be00;        /* Supporting Yellow contrast */
+    --tint: #1c1c1c0a;
+    --font: "PP Mori", "Plus Jakarta Sans", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    --mono: "DM Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1c1c1c; --card: #262626; --ink: #fffaf6; --muted: #fffaf6b3; --rule: #fffaf61f;
+      --accent: #fda4c7; --act: #fda4c7; --act-bg: #f431752e; --coming: #b3d8ff; --coming-bg: #3168ff2e;
+      --win: #66e2c3; --win-bg: #21c2a229; --wait: #fff487; --wait-bg: #fedd001f; --wait-line: #f6be00;
+      --tint: #fffaf60d; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1c1c1c; --card: #262626; --ink: #fffaf6; --muted: #fffaf6b3; --rule: #fffaf61f;
+    --accent: #fda4c7; --act: #fda4c7; --act-bg: #f431752e; --coming: #b3d8ff; --coming-bg: #3168ff2e;
+    --win: #66e2c3; --win-bg: #21c2a229; --wait: #fff487; --wait-bg: #fedd001f; --wait-line: #f6be00;
+    --tint: #fffaf60d; color-scheme: dark;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font: 400 1.0625rem/1.65 var(--font);
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 2.5rem 4rem;
+  }
+  .page { max-width: 46rem; margin: 0 auto; display: grid; gap: 3rem; }
+  .page > * { min-width: 0; }
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+  a:hover { text-decoration-thickness: 2px; }
+  a:focus-visible { outline: 2px solid var(--magenta); outline-offset: 2px; border-radius: 3px; }
+  code {
+    font: 500 0.82em/1.4 var(--mono);
+    background: var(--tint);
+    padding: 0.1em 0.35em;
+    border-radius: 6px;
+    overflow-wrap: anywhere;
+  }
+  a.ref { font: 500 0.8em/1 var(--mono); white-space: nowrap; }
+  p, ul { margin: 0; }
+  strong { font-weight: 700; }
+
+  /* Masthead */
+  .masthead { display: grid; gap: 1.1rem; }
+  .brand {
+    display: flex; align-items: center; gap: 0.6rem;
+    font: 700 1rem/1 var(--font);
+  }
+  .brand::before { content: ""; width: 0.85rem; height: 0.85rem; border-radius: 50%; background: var(--magenta); }
+  .eyebrow {
+    font: 700 0.78rem/1.2 var(--font);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 3px solid var(--magenta);
+  }
+  .eyebrow span:last-child { color: var(--muted); letter-spacing: 0.02em; text-transform: none; font-weight: 500; }
+  h1 {
+    margin: 0;
+    font: 800 clamp(2rem, 5.2vw, 3.1rem)/1.08 var(--font);
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  /* In 30 seconds */
+  .glance { display: grid; gap: 0.9rem; }
+  .label {
+    font: 700 0.78rem/1.2 var(--font);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .glance-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 0.9rem; }
+  .glance-card {
+    border-radius: 24px;
+    padding: 1.1rem 1.2rem 1.25rem;
+    display: grid; gap: 0.45rem; align-content: start;
+    font-size: 0.97rem; line-height: 1.55;
+    min-width: 0;
+  }
+  .glance-card .kind { font: 800 1rem/1 var(--font); }
+  .glance-card.act { background: var(--act-bg); }
+  .glance-card.coming { background: var(--coming-bg); }
+  .glance-card.win { background: var(--win-bg); }
+  .kind.act { color: var(--act); }
+  .kind.coming { color: var(--coming); }
+  .kind.win { color: var(--win); }
+  .glance-card .text::first-letter { text-transform: uppercase; }
+  .intro { color: var(--muted); font-style: italic; }
+
+  /* Sections */
+  section { display: grid; gap: 1.1rem; }
+  section > * { min-width: 0; }
+  h2 {
+    margin: 0;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--rule);
+    font: 800 1.6rem/1.2 var(--font);
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+  section > ul { padding-left: 1.2rem; display: grid; gap: 0.75rem; }
+  section > ul > li::marker { color: var(--magenta); }
+
+  /* Actions */
+  .action {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--magenta);
+    border-radius: 24px;
+    padding: 1.25rem 1.3rem;
+    display: grid; gap: 0.8rem;
+  }
+  .action h3 { margin: 0; font: 700 1.2rem/1.25 var(--font); color: var(--act); text-wrap: balance; }
+  .action ul { list-style: none; padding: 0; display: grid; gap: 0.7rem; }
+  .action li.row { display: grid; grid-template-columns: 3.5rem minmax(0, 1fr); gap: 0.75rem; }
+  .action li.row > .k { font: 700 0.75rem/2.1 var(--font); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .action li.row ul { list-style: disc; padding-left: 1.1rem; margin-top: 0.6rem; }
+  .action li.row ul > li::marker { color: var(--magenta); }
+  .done { font-weight: 700; color: var(--win); display: flex; gap: 0.5rem; align-items: baseline; }
+  .done::before { content: "✓"; }
+
+  /* Coming up */
+  .items { display: grid; gap: 0.8rem; }
+  .item {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 24px;
+    padding: 1.05rem 1.25rem 1.15rem;
+    display: grid; gap: 0.55rem;
+  }
+  .item .what { font: 700 1.05rem/1.35 var(--font); }
+  .item .status { font-size: 0.9rem; color: var(--muted); display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.6rem; }
+  .pill {
+    font: 700 0.72rem/1 var(--font);
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 0.4em 0.75em; border-radius: 90px;
+    background: var(--tint);
+    color: var(--ink);
+  }
+  .pill.preparing { background: var(--wait-bg); color: var(--wait); box-shadow: inset 0 0 0 1px var(--wait-line); }
+  .pill.in-review { background: var(--coming-bg); color: var(--coming); }
+  .pill.ready-to-start, .pill.live { background: var(--win-bg); color: var(--win); }
+  .item .for { font-size: 0.97rem; }
+  .item .for::before { content: "For you: "; font-weight: 700; }
+  .table-wrap { overflow-x: auto; }
+  .table-wrap table { border-collapse: collapse; font-size: 0.95rem; }
+  .table-wrap th, .table-wrap td { border-bottom: 1px solid var(--rule); padding: 0.5rem; text-align: left; vertical-align: top; }
+
+  /* Progress line */
+  .progress {
+    background: var(--act-bg);
+    border-radius: 24px;
+    padding: 1.05rem 1.25rem;
+  }
+
+  /* Footer */
+  footer {
+    border-top: 3px solid var(--magenta);
+    padding-top: 1.2rem;
+    display: grid; gap: 0.8rem;
+    font-size: 0.93rem; color: var(--muted);
+  }
+  footer strong { color: var(--ink); }
+  footer em { font-style: normal; }
+  .fallback { white-space: pre-wrap; font: 0.9rem/1.5 var(--mono); }
+
+  @media (max-width: 30rem) {
+    body { padding-block: 1.5rem 3rem; font-size: 1rem; }
+    .page { gap: 2.4rem; }
+    .action li.row { grid-template-columns: 1fr; gap: 0.15rem; }
+    .action li.row > .k { line-height: 1.4; }
+  }
+</style>
+
+<main class="page" id="page"></main>
+
+<script type="text/markdown" id="newsletter">
+# Review environments now need the VPN, and the group platform is ready for its first company
+
+*Infrastructure news for November 2026 (2026-11-01 to 2026-11-27).*
+
+**In 30 seconds**
+- **Act:** use the VPN for the admin pages of review environments, and check your Ingress rules before the
+  Traefik switch.
+- **Coming:** review environments move to a new cluster, and GitLab is being switched off. Still using GitLab?
+  Tell the infra team.
+- **Win:** shorter CI queues, and Teams alerts that come with logs, a graph and a silence button.
+
+*Review environments* are the test copy of the Sdui app that is built for each ticket, on `sdux.de`.
+
+## What you need to do
+
+**Use the VPN for review-environment admin pages**
+- *Who:* anyone who opens the RabbitMQ admin page or the ODS API of a review environment.
+- *What:* connect to the company VPN first. Since 2026-11-19 these pages no longer answer from the open internet
+  ([#49](https://github.com/7education/infra-ci-central/pull/49)).
+- *Help:* no VPN access yet? Open a ticket in the Jira project INFRA.
+
+**Check your Ingress rules before the Traefik switch**
+- *Who:* teams that write their own Kubernetes Ingress rules (the rules that route web traffic to a service) for
+  review environments.
+- *What:* review environments are moving to a new traffic router, Traefik. Two kinds of rule will stop working:
+  passing requests to PHP the FastCGI way, and regex paths without the setting `pathType: ImplementationSpecific`.
+  To check, search your chart for `fastcgi` and for regex paths
+  ([#47](https://github.com/7education/infra-ci-central/pull/47),
+  [#48](https://github.com/7education/infra-ci-central/pull/48)).
+- *Help:* a ticket in Jira INFRA.
+
+Nothing else needs action from you.
+
+## Coming up
+
+| What | Status | What it means for you |
+|---|---|---|
+| Review environments move to a new cluster at OVH | In review ([#50](https://github.com/7education/infra-ci-central/pull/50)) | Same environments, newer cluster. Your access carries over |
+| Review environments switch to Traefik | Preparing | Check your Ingress rules (see above) |
+| GitLab is switched off | Preparing ([#45](https://github.com/7education/infra-ci-central/pull/45)) | Still pulling images or code from GitLab? Tell the infra team in Jira INFRA |
+| Fox moves its data to the group platform | Ready to start ([#982](https://github.com/7education/services-ovh-infra/pull/982)) | Fox team only |
+
+None of these has a date yet. The next issue will say what moved.
+
+## Where this is going
+
+**Progress:** 8 companies have their own space on the group platform, and 1 (Fox) has its production database
+ready there. Old servers switched off this month: the old Countly cluster and 8 more.
+
+**One platform for the whole group.** The 7education group (Sdui, Additio, Educamos, Fox and others) is moving
+onto one shared platform at OVH, a European cloud provider. It runs apps on Kubernetes and databases (PostgreSQL
+and MariaDB) on shared servers. Companies with a space there today: 7os, Additio, Digionline, DS42, Educamos,
+Fox, the group's internal IT, and Sdui. Fox's new database replaces 10 database servers at another cloud
+provider. If your company still runs its own database servers, the infra team can take over patching, backups
+and restore tests. Ask in Jira INFRA ([#629](https://github.com/7education/services-ovh-infra/pull/629)).
+
+**Backups proven by restores (Dev now, production next).** A database on the group platform goes live only after
+its backup was restored successfully once. After that, one backup is restored every week. The infra team runs
+this for you; ask them to include it in your go-live date
+([#670](https://github.com/7education/services-ovh-infra/pull/670),
+[#1172](https://github.com/7education/services-ovh-infra/pull/1172)).
+
+**Fewer old servers.** The infra team switched off the old cluster of Countly (the app usage analytics tool) and
+8 old Sdui servers: phpMyAdmin, the timetable web server, two Redis workers, a preprod jump host, and the s3sync,
+imaginary and broadcast services. That is less to pay for and less to patch
+([#71](https://github.com/7education/Infrastructure/pull/71),
+[#75](https://github.com/7education/Infrastructure/pull/75),
+[#110](https://github.com/7education/Infrastructure/pull/110)).
+
+## Good to know
+
+- **Shorter CI queues.** Repos that build on the group platform's Dev runners can run 100 jobs at once instead of
+  58, so jobs wait less ([#1048](https://github.com/7education/services-ovh-infra/pull/1048)).
+- **Alerts you can act on.** Alerts in Teams now include logs, pod status, a graph, and buttons to silence or
+  acknowledge them ([#1080](https://github.com/7education/services-ovh-infra/pull/1080)). Want your service's
+  alerts in your team's channel? Open a PR in `Infrastructure`.
+
+## Thanks
+
+Steffen Stricker (restore-tested backups, richer Teams alerts), Valeri Schock (Fox's production database),
+Rustam Galimyanov (the new cluster for review environments), Muhammad Ali (switching off the old servers),
+Suraj Mookola (the VPN lock and the way to Traefik), René Engel (more CI capacity) and Cristian Prat (Additio's
+uptime alerts).
+
+---
+
+**Where to look when your app breaks:** Sdui app, IAM (login), review environments and Countly in
+[grafana.sdui-group.app](https://grafana.sdui-group.app). Apps on the group platform: your company's own Grafana
+space there.
+
+**Who to ask:** alerts, dashboards, DNS, buckets and databases: open a PR in
+[Infrastructure](https://github.com/7education/Infrastructure); its README says where each request goes. VPN,
+access and anything else: a ticket in the Jira project INFRA.
+
+*Source: pull requests in the infrastructure team's four GitHub repos, 2026-11-01 to 2026-11-27. Whether
+something is live was checked against OVH and the logs.*
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script>
+(function () {
+  const page = document.getElementById('page');
+  const src = document.getElementById('newsletter').textContent.trim();
+  const el = (tag, cls, html) => {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (html != null) e.innerHTML = html;
+    return e;
+  };
+  const slug = s => s.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+  if (!window.marked) {
+    page.appendChild(el('pre', 'fallback')).textContent = src;
+    return;
+  }
+  const doc = el('div', null, marked.parse(src));
+
+  // PR, issue and commit links ("#1653", "Infrastructure#84", "change") are set in the mono font.
+  doc.querySelectorAll('a').forEach(a => {
+    if (/^([\w.-]+)?#\d+$|^change$/.test(a.textContent.trim())) a.classList.add('ref');
+  });
+
+  try {
+    // Masthead: the h1 headline and the "*<Group> news for <Month> (<range>).*" line.
+    const head = el('header', 'masthead');
+    head.appendChild(el('div', 'brand', 'Seven Education'));
+    const h1 = doc.querySelector('h1');
+    const dateline = h1 && h1.nextElementSibling;
+    if (dateline && dateline.matches('p') && dateline.firstElementChild && dateline.firstElementChild.matches('em')) {
+      const m = dateline.textContent.trim().match(/^(.*?) for (.*?)\s*\((.*)\)\.?$/);
+      head.appendChild(el('div', 'eyebrow', m
+        ? `<span>${m[1]} · ${m[2]}</span><span>Covers ${m[3]}</span>`
+        : `<span>${dateline.innerHTML}</span>`));
+      dateline.remove();
+    }
+    if (h1) head.appendChild(h1);
+    page.appendChild(head);
+
+    // In 30 seconds: "**In 30 seconds**" and its list of **Act:** / **Coming:** / **Win:** items.
+    const glanceLabel = [...doc.querySelectorAll('p')].find(p => /^In 30 seconds$/i.test(p.textContent.trim()));
+    if (glanceLabel && glanceLabel.nextElementSibling && glanceLabel.nextElementSibling.matches('ul')) {
+      const list = glanceLabel.nextElementSibling;
+      const box = el('div', 'glance');
+      box.appendChild(el('div', 'label', 'In 30 seconds'));
+      const cards = el('div', 'glance-cards');
+      list.querySelectorAll(':scope > li').forEach(li => {
+        const lead = li.querySelector('strong');
+        const kind = lead ? lead.textContent.replace(/:\s*$/, '').trim() : '';
+        if (lead) lead.remove();
+        const card = el('div', 'glance-card ' + slug(kind));
+        card.appendChild(el('div', 'kind ' + slug(kind), kind));
+        card.appendChild(el('div', 'text', li.innerHTML.trim().replace(/^:\s*/, '')));
+        cards.appendChild(card);
+      });
+      box.appendChild(cards);
+      page.appendChild(box);
+      list.remove();
+      glanceLabel.remove();
+    }
+
+    // Anything before the first h2 (such as a term explained up front) is an intro note.
+    while (doc.firstElementChild && !doc.firstElementChild.matches('h2')) {
+      const n = doc.firstElementChild;
+      n.classList.add('intro');
+      page.appendChild(n);
+    }
+
+    // One <section> per h2.
+    let section = null;
+    [...doc.children].forEach(n => {
+      if (n.matches('h2')) {
+        section = el('section');
+        section.id = slug(n.textContent);
+        page.appendChild(section);
+      }
+      if (section) section.appendChild(n);
+    });
+
+    page.querySelectorAll('section').forEach(sec => {
+      const name = sec.id;
+
+      // What you need to do: "**Title**" + list of *Who:* / *What:* / *Help:* rows.
+      if (name.startsWith('what-you-need-to-do')) {
+        [...sec.children].forEach(n => {
+          const strong = n.matches('p') && n.children.length === 1 && n.firstElementChild.matches('strong')
+            && n.textContent.trim() === n.firstElementChild.textContent.trim();
+          if (strong && n.nextElementSibling && n.nextElementSibling.matches('ul')) {
+            const card = el('article', 'action');
+            const list = n.nextElementSibling;
+            card.appendChild(el('h3', null, n.firstElementChild.innerHTML));
+            list.querySelectorAll(':scope > li').forEach(li => {
+              const first = li.firstElementChild;
+              if (first && first.matches('em') && li.innerHTML.trim().startsWith('<em>')) {
+                const k = first.textContent.replace(/:\s*$/, '');
+                first.remove();
+                const body = li.innerHTML.trim().replace(/^:\s*/, '');
+                li.className = 'row';
+                li.innerHTML = '';
+                li.appendChild(el('span', 'k', k));
+                li.appendChild(el('div', null, body));
+              }
+            });
+            card.appendChild(list);
+            n.replaceWith(card);
+          } else if (n.matches('p') && /^Nothing else/.test(n.textContent.trim())) {
+            n.classList.add('done');
+          }
+        });
+      }
+
+      // Coming up: the What / Status / What it means table becomes a list of cards.
+      sec.querySelectorAll('table').forEach(table => {
+        const heads = [...table.querySelectorAll('thead th')].map(th => th.textContent.trim().toLowerCase());
+        if (heads.length === 3 && heads[0] === 'what' && heads[1] === 'status') {
+          const items = el('div', 'items');
+          table.querySelectorAll('tbody tr').forEach(tr => {
+            const [what, status, means] = tr.querySelectorAll('td');
+            const item = el('article', 'item');
+            item.appendChild(el('div', 'what', what.innerHTML));
+            const st = el('div', 'status');
+            const m = status.innerHTML.match(/^(Planned|Preparing|In review|Ready to start|Live)\b[:,]?\s*(.*)$/s);
+            if (m) {
+              st.appendChild(el('span', 'pill ' + slug(m[1]), m[1]));
+              if (m[2]) st.appendChild(el('span', null, m[2]));
+            } else {
+              st.innerHTML = status.innerHTML;
+            }
+            item.appendChild(st);
+            item.appendChild(el('div', 'for', means.innerHTML));
+            items.appendChild(item);
+          });
+          table.replaceWith(items);
+        } else {
+          const wrap = el('div', 'table-wrap');
+          table.replaceWith(wrap);
+          wrap.appendChild(table);
+        }
+      });
+
+      sec.querySelectorAll(':scope > p').forEach(p => {
+        if (/^Progress:/.test(p.textContent.trim())) p.classList.add('progress');
+      });
+
+      // Thanks: the first paragraph thanks people; what follows (help, source line) is the footer.
+      if (name === 'thanks') {
+        const rest = [...sec.children].slice(2);
+        if (rest.length) {
+          const footer = el('footer');
+          rest.forEach(n => { if (n.matches('hr')) n.remove(); else footer.appendChild(n); });
+          page.appendChild(footer);
+        }
+      }
+    });
+  } catch (err) {
+    console.error('newsletter layout', err);
+    page.innerHTML = '';
+    page.appendChild(el('div', null, marked.parse(src)));
+  }
+})();
+</script>
